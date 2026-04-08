@@ -790,12 +790,9 @@ void SfxApplication::MiscExec_Impl( SfxRequest& rReq )
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         case SID_HELPINDEX:
         {
-            Help* pHelp = Application::GetHelp();
-            if ( pHelp )
-            {
-                pHelp->Start(u".uno:HelpIndex"_ustr, rReq.GetFrameWeld()); // show start page
-                bDone = true;
-            }
+            // EUnifyer: open feedback site instead of built-in help
+            sfx2::openUriExternally(u"https://feedback.eunifyer.com/"_ustr, false, rReq.GetFrameWeld());
+            bDone = true;
             break;
         }
 

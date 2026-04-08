@@ -337,19 +337,19 @@
       </node>
     </node>
     <prop oor:name="SendFeedbackURL" oor:type="xs:string">
-      <value>https://hub.libreoffice.org/send-feedback/</value>
+      <value>https://feedback.eunifyer.com/</value>
     </prop>
     <prop oor:name="QA_URL" oor:type="xs:string">
-      <value>https://hub.libreoffice.org/forum/</value>
+      <value>https://feedback.eunifyer.com/</value>
     </prop>
     <prop oor:name="DocumentationURL" oor:type="xs:string">
-      <value>https://hub.libreoffice.org/documentation/</value>
+      <value>https://feedback.eunifyer.com/</value>
     </prop>
     <prop oor:name="GetInvolvedURL" oor:type="xs:string">
-      <value>https://hub.libreoffice.org/joinus/</value>
+      <value>https://feedback.eunifyer.com/</value>
     </prop>
     <prop oor:name="DonationURL" oor:type="xs:string">
-      <value>https://hub.libreoffice.org/donation/</value>
+      <value>https://feedback.eunifyer.com/</value>
     </prop>
     <prop oor:name="ReleaseNotesURL" oor:type="xs:string">
       <value>https://hub.libreoffice.org/ReleaseNotes/</value>
