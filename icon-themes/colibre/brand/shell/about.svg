@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
-  <title>EUnifyer Office</title>
-  <!-- Hexagon logo (centered, used for welcome screen + about dialog) -->
-  <polygon points="64,4 118,35 118,93 64,124 10,93 10,35" fill="#0659E3"/>
-  <polygon points="64,20 104,43 104,89 64,112 24,89 24,43" fill="#18191A"/>
-  <polygon points="64,33 93,50 93,83 64,100 35,83 35,50" fill="#FCDF05"/>
-  <polygon points="64,50 79,59 79,76 64,85 49,76 49,59" fill="#18191A"/>
+<svg version="1.2" baseProfile="tiny-ps"
+     xmlns="http://www.w3.org/2000/svg"
+     width="512" height="512" viewBox="0 0 512 512">
+  <title>EUnifyer</title>
+  <!-- Outer blue hexagon -->
+  <polygon points="256,32 460,150 460,362 256,480 52,362 52,150" fill="#0659E3"/>
+  <!-- Dark ring hexagon -->
+  <polygon points="256,100 400,183 400,329 256,412 112,329 112,183" fill="#18191A"/>
+  <!-- Yellow hexagon -->
+  <polygon points="256,150 355,207 355,317 256,374 157,317 157,207" fill="#FCDF05"/>
+  <!-- Inner dark hexagon -->
+  <polygon points="256,210 298,234 298,282 256,306 214,282 214,234" fill="#18191A"/>
 </svg>
