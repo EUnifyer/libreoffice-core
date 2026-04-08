@@ -724,7 +724,7 @@ IMPL_LINK( BackingWindow, ClickHdl, weld::Button&, rButton, void )
     else if( &rButton == mxCalcAllButton.get() )
         dispatchURL( u"private:factory/scalc"_ustr );
     else if( &rButton == mxImpressAllButton.get() )
-        dispatchURL( u"private:factory/simpress?slot=6686"_ustr );
+        dispatchURL( u"private:factory/simpress"_ustr );
     else if( &rButton == mxDrawAllButton.get() )
         dispatchURL( u"private:factory/sdraw"_ustr );
     else if( &rButton == mxDBAllButton.get() )
