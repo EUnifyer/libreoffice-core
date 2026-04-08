@@ -145,7 +145,7 @@ public:
     {
         if (rMEvt.IsLeft())
         {
-            OUString sURL = officecfg::Office::Common::Menus::VolunteerURL::get();
+            OUString sURL(u"https://eunifyer.com"_ustr);
             localizeWebserviceURI(sURL);
 
             Reference<css::system::XSystemShellExecute> const xSystemShellExecute(
@@ -203,23 +203,8 @@ BackingWindow::BackingWindow(vcl::Window* i_pParent)
     // init background, undo InterimItemWindow defaults for this widget
     SetPaintTransparent(false);
 
-    // draw the donation image/text
-    const bool bShowDonation(officecfg::Office::Common::Misc::ShowDonation::get());
-    assert(DONATIONBANNER_FREQ > 0 && DONATIONBANNER_HEIGHT > 0 && DONATIONBANNER_HEIGHT < 1);
-    if (bShowDonation)
-    {
-        std::srand(std::time({}));
-        nRand = std::rand() % std::size(STR_DONATIONBANNER);
-
-        const auto t0 = std::chrono::system_clock::now().time_since_epoch();
-        const sal_Int32 nDay = std::chrono::duration_cast<std::chrono::hours>(t0).count()/24; // days since 1970-01-01
-        if (nDay % DONATIONBANNER_FREQ == 0)
-        {
-            mxDonation->set_visible(true);
-            mxDonation->connect_mouse_release(LINK(this, BackingWindow, MouseReleaseHdl));
-            mxRightBox->connect_size_allocate(LINK(this, BackingWindow, ResizeHdl));
-        }
-    }
+    // EUnifyer: disable donation banners entirely
+    (void)officecfg::Office::Common::Misc::ShowDonation::get();
 
     // square action button
     auto nHeight = mxFilter->get_preferred_size().getHeight();
@@ -229,20 +214,9 @@ BackingWindow::BackingWindow(vcl::Window* i_pParent)
     mxHelpButton->set_label(mxAltHelpLabel->get_label());
     mxHelpButton->connect_clicked(LINK(this, BackingWindow, ClickHelpHdl));
 
-    // tdf#161796 replace the extension button with a donate button
-    if (bShowDonation)
-    {
-        mxExtensionsButton->hide();
-        mxDonateButton->show();
-        mxDonateButton->set_from_icon_name(BMP_DONATE);
-        OUString sDonate(SfxResId(STR_DONATE_BUTTON));
-        if (sDonate.getLength() > 8)
-        {
-            mxDonateButton->set_tooltip_text(sDonate);
-            sDonate = OUString::Concat(sDonate.subView(0, 7)) + "...";
-        }
-        mxDonateButton->set_label(sDonate);
-    }
+    // EUnifyer: hide donate + extensions, keep help only
+    mxExtensionsButton->hide();
+    mxDonateButton->hide();
 
     mxDropTarget = mxAllRecentThumbnails->GetDropTarget();
 
@@ -263,10 +237,14 @@ BackingWindow::BackingWindow(vcl::Window* i_pParent)
 
 }
 
-IMPL_LINK(BackingWindow, ClickHelpHdl, weld::Button&, rButton, void)
+IMPL_LINK_NOARG(BackingWindow, ClickHelpHdl, weld::Button&, void)
 {
-    if (Help* pHelp = Application::GetHelp())
-        pHelp->Start(m_xContainer->get_help_id(), &rButton);
+    Reference<css::system::XSystemShellExecute> const xSystemShellExecute(
+        css::system::SystemShellExecute::create(
+            ::comphelper::getProcessComponentContext()));
+    xSystemShellExecute->execute(
+        u"https://feedback.eunifyer.com/"_ustr, OUString(),
+        css::system::SystemShellExecuteFlags::URIS_ONLY);
 }
 
 IMPL_STATIC_LINK(BackingWindow, MouseReleaseHdl, const MouseEvent&, rMEvt, bool)
