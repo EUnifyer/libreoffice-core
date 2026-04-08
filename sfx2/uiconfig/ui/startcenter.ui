@@ -295,7 +295,7 @@
                     <child>
                       <object class="GtkButton" id="draw_all">
                         <property name="label" translatable="yes" context="startcenter|draw_all">_Draw</property>
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can-focus">True</property>
                         <property name="receives-default">True</property>
                         <property name="margin-start">6</property>
@@ -315,7 +315,7 @@
                     <child>
                       <object class="GtkButton" id="math_all">
                         <property name="label" translatable="yes" context="startcenter|math_all">_Formula</property>
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can-focus">True</property>
                         <property name="receives-default">True</property>
                         <property name="margin-start">6</property>
@@ -335,7 +335,7 @@
                     <child>
                       <object class="GtkButton" id="database_all">
                         <property name="label" translatable="yes" context="startcenter|database_all">_Database</property>
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
                         <property name="can-focus">True</property>
                         <property name="receives-default">True</property>
                         <property name="margin-start">6</property>
