@@ -1,1 +1,14 @@
-<svg height="32" width="32" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><linearGradient id="a" gradientUnits="userSpaceOnUse" x1="400.57141672381" x2="400.57144472381" y1="538.79800252627" y2="526.53130510532"><stop offset="0" stop-color="#a5a9af"/><stop offset="1" stop-color="#dadcde"/></linearGradient><linearGradient id="b" gradientTransform="matrix(2.0363633 0 0 -1.9310359 -1185.9637 1528.4613)" gradientUnits="userSpaceOnUse" x1="400.57144" x2="400.57144" y1="545.79797" y2="517.79797"><stop offset="0" stop-color="#2a2c2f"/><stop offset="1" stop-color="#424649"/></linearGradient><g transform="translate(-384.57143 -515.798)"><path d="m389.57144 545.79796v-27.99999l13.49999.00003 8.5 8.5v19.49996z" fill="url(#b)"/><path d="m5 2v1h14.5l-1-1z" fill="#2e3132" fill-opacity=".294118" transform="translate(384.57143 515.798)"/><path d="m389.57144 545.798h21.99999v-1.00003h-21.99999z" fill="#fff" fill-opacity=".411765"/><path d="m411.57143 524.79797-7-7.00001h7z" fill="#212323" fill-rule="evenodd"/><path d="m395.57134 526.79818.00018 11.99982h6.33333l3.66667-3.33333v-8.66667h-10zm1.00009.99982h8v7h-3v3h-5z" fill="url(#a)" stroke-width=".933333"/></g></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg version="1.2" baseProfile="tiny-ps"
+     xmlns="http://www.w3.org/2000/svg"
+     width="512" height="512" viewBox="0 0 512 512">
+  <title>EUnifyer</title>
+  <!-- Outer blue hexagon -->
+  <polygon points="256,32 460,150 460,362 256,480 52,362 52,150" fill="#0659E3"/>
+  <!-- Dark ring hexagon -->
+  <polygon points="256,100 400,183 400,329 256,412 112,329 112,183" fill="#18191A"/>
+  <!-- Yellow hexagon -->
+  <polygon points="256,150 355,207 355,317 256,374 157,317 157,207" fill="#FCDF05"/>
+  <!-- Inner dark hexagon -->
+  <polygon points="256,210 298,234 298,282 256,306 214,282 214,234" fill="#18191A"/>
+</svg>

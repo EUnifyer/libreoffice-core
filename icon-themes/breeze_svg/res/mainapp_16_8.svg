@@ -1,1 +1,14 @@
-<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="m3 2v12h10v-7l-5-5zm1 1h4l4 4v6h-8z"/><path d="m13 6v-1-3h-3-1z"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg version="1.2" baseProfile="tiny-ps"
+     xmlns="http://www.w3.org/2000/svg"
+     width="512" height="512" viewBox="0 0 512 512">
+  <title>EUnifyer</title>
+  <!-- Outer blue hexagon -->
+  <polygon points="256,32 460,150 460,362 256,480 52,362 52,150" fill="#0659E3"/>
+  <!-- Dark ring hexagon -->
+  <polygon points="256,100 400,183 400,329 256,412 112,329 112,183" fill="#18191A"/>
+  <!-- Yellow hexagon -->
+  <polygon points="256,150 355,207 355,317 256,374 157,317 157,207" fill="#FCDF05"/>
+  <!-- Inner dark hexagon -->
+  <polygon points="256,210 298,234 298,282 256,306 214,282 214,234" fill="#18191A"/>
+</svg>
