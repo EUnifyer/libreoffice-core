@@ -128,13 +128,14 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">0</property>
+                        <property name="position">5</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkButton" id="open_remote">
                         <property name="label" translatable="yes" context="startcenter|open_remote">Remote File_s</property>
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
+                        <property name="no-show-all">True</property>
                         <property name="can-focus">True</property>
                         <property name="receives-default">True</property>
                         <property name="margin-start">6</property>
@@ -148,12 +149,13 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">1</property>
+                        <property name="position">9</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkSeparator" id="separator3">
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
+                        <property name="no-show-all">True</property>
                         <property name="can-focus">False</property>
                         <property name="margin-start">6</property>
                         <property name="margin-end">6</property>
@@ -161,7 +163,7 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">2</property>
+                        <property name="position">8</property>
                       </packing>
                     </child>
                     <child>
@@ -181,7 +183,7 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">3</property>
+                        <property name="position">6</property>
                       </packing>
                     </child>
                     <child>
@@ -201,7 +203,7 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">4</property>
+                        <property name="position">7</property>
                       </packing>
                     </child>
                     <child>
@@ -214,7 +216,7 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">5</property>
+                        <property name="position">4</property>
                       </packing>
                     </child>
                     <child>
@@ -223,18 +225,18 @@
                         <property name="can-focus">False</property>
                         <property name="margin-start">12</property>
                         <property name="margin-bottom">6</property>
-                        <property name="label" translatable="yes" context="startcenter|create_label">Create:</property>
+                        <property name="label" translatable="yes" context="startcenter|create_label">Create</property>
                         <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">6</property>
+                        <property name="position">0</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkButton" id="writer_all">
-                        <property name="label" translatable="yes" context="startcenter|writer_all">_Docs</property>
+                        <property name="label" translatable="yes" context="startcenter|writer_all">New Doc</property>
                         <property name="visible">True</property>
                         <property name="can-focus">True</property>
                         <property name="receives-default">True</property>
@@ -249,12 +251,12 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">7</property>
+                        <property name="position">1</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkButton" id="calc_all">
-                        <property name="label" translatable="yes" context="startcenter|calc_all">_Sheets</property>
+                        <property name="label" translatable="yes" context="startcenter|calc_all">New Sheet</property>
                         <property name="visible">True</property>
                         <property name="can-focus">True</property>
                         <property name="receives-default">True</property>
@@ -269,12 +271,12 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">8</property>
+                        <property name="position">2</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkButton" id="impress_all">
-                        <property name="label" translatable="yes" context="startcenter|impress_all">_Slides</property>
+                        <property name="label" translatable="yes" context="startcenter|impress_all">New Slides</property>
                         <property name="visible">True</property>
                         <property name="can-focus">True</property>
                         <property name="receives-default">True</property>
@@ -289,7 +291,7 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">9</property>
+                        <property name="position">3</property>
                       </packing>
                     </child>
                     <child>
@@ -369,22 +371,24 @@
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="position">0</property>
+                    <property name="position">1</property>
                   </packing>
                 </child>
                 <child>
                   <object class="GtkDrawingArea" id="daBrand">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
+                    <property name="halign">start</property>
                     <property name="valign">center</property>
                     <property name="margin-start">12</property>
                     <property name="margin-end">12</property>
-                    <property name="margin-bottom">12</property>
+                    <property name="margin-top">14</property>
+                    <property name="margin-bottom">14</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="position">1</property>
+                    <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
@@ -427,7 +431,8 @@
                     <child>
                       <object class="GtkButton" id="extensions">
                         <property name="label" translatable="yes" context="startcenter|extensions">E_xtensions</property>
-                        <property name="visible">True</property>
+                        <property name="visible">False</property>
+                        <property name="no-show-all">True</property>
                         <property name="can-focus">True</property>
                         <property name="receives-default">True</property>
                         <property name="relief">none</property>
