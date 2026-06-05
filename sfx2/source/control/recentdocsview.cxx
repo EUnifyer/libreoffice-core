@@ -285,8 +285,12 @@ void RecentDocsView::Paint(vcl::RenderContext& rRenderContext, const tools::Rect
 
     if (maWelcomeImage.IsEmpty())
     {
-        const tools::Long aWidth(aRect.GetWidth() > aRect.getOpenHeight() ? aRect.GetHeight()/2 : aRect.GetWidth()/2);
-        maWelcomeImage = SfxApplication::GetApplicationLogo(aWidth);
+        // EUnifyer: keep the empty-state logo small + modern instead of a huge
+        // half-the-pane watermark. Cap it to a tasteful badge size.
+        tools::Long aLogoWidth(aRect.GetWidth() > aRect.getOpenHeight() ? aRect.GetHeight()/2 : aRect.GetWidth()/2);
+        if (aLogoWidth > 140)
+            aLogoWidth = 140;
+        maWelcomeImage = SfxApplication::GetApplicationLogo(aLogoWidth);
     }
 
     // No recent files to be shown yet. Show a welcome screen.
