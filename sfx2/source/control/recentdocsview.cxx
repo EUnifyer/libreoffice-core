@@ -32,10 +32,14 @@
 #include <bitmaps.hlst>
 #include "recentdocsviewitem.hxx"
 #include <sfx2/app.hxx>
+#include <osl/file.hxx>
+#include <osl/security.hxx>
 
 #include <officecfg/Office/Common.hxx>
 
+#include <algorithm>
 #include <map>
+#include <set>
 
 using namespace ::com::sun::star;
 using namespace com::sun::star::uno;
@@ -48,6 +52,49 @@ void SetMessageFont(vcl::RenderContext& rRenderContext)
     vcl::Font aFont(rRenderContext.GetFont());
     aFont.SetFontHeight(aFont.GetFontHeight() * 1.3);
     rRenderContext.SetFont(aFont);
+}
+
+/// One file found in the EUnifyer Drive sync folder.
+struct EunifyerSyncFile
+{
+    OUString aURL;
+    sal_uInt32 nMtime;
+};
+
+/// File URL of the EUnifyer Desktop sync folder (~/EUnifyer), or empty.
+OUString getEunifyerSyncFolderUrl()
+{
+    OUString aHomeUrl;
+    if (!osl::Security().getHomeDir(aHomeUrl) || aHomeUrl.isEmpty())
+        return OUString();
+    return aHomeUrl + "/EUnifyer";
+}
+
+/// Recursively collect regular files under the synced ~/EUnifyer folder
+/// (bounded in depth and count to stay cheap on large Drives).
+void collectSyncFiles(const OUString& rDirUrl, std::vector<EunifyerSyncFile>& rOut, int nDepth)
+{
+    if (nDepth > 4 || rOut.size() >= 400)
+        return;
+    osl::Directory aDir(rDirUrl);
+    if (aDir.open() != osl::FileBase::E_None)
+        return;
+    osl::DirectoryItem aItem;
+    while (aDir.getNextItem(aItem) == osl::FileBase::E_None && rOut.size() < 400)
+    {
+        osl::FileStatus aStat(osl_FileStatus_Mask_Type | osl_FileStatus_Mask_FileName
+                              | osl_FileStatus_Mask_FileURL | osl_FileStatus_Mask_ModifyTime);
+        if (aItem.getFileStatus(aStat) != osl::FileBase::E_None)
+            continue;
+        const OUString aName = aStat.getFileName();
+        if (aName.isEmpty() || aName.startsWith(".") || aName.startsWith("~$"))
+            continue;
+        const osl::FileStatus::Type eType = aStat.getFileType();
+        if (eType == osl::FileStatus::Directory)
+            collectSyncFiles(aStat.getFileURL(), rOut, nDepth + 1);
+        else if (eType == osl::FileStatus::Regular)
+            rOut.push_back({ aStat.getFileURL(), aStat.getModifyTime().Seconds });
+    }
 }
 
 }
@@ -95,6 +142,10 @@ void RecentDocsView::UpdateColors(const StyleSettings& rSettings)
     ThumbnailView::UpdateColors(rSettings);
 
     maFillColor = Color(ColorTransparency, officecfg::Office::Common::Help::StartCenter::StartCenterThumbnailsBackgroundColor::get());
+    // EUnifyer: warm, subtle "creamy" tint for the recent/welcome pane in light
+    // mode; leave dark mode to the theme.
+    if (!rSettings.GetWindowColor().IsDark())
+        maFillColor = Color(0xFA, 0xF7, 0xF0);
     maTextColor = Color(ColorTransparency, officecfg::Office::Common::Help::StartCenter::StartCenterThumbnailsTextColor::get());
 
     maHighlightColor = rSettings.GetHighlightColor();
@@ -163,6 +214,8 @@ void RecentDocsView::Reload()
 {
     Clear();
 
+    std::set<OUString> aSeen;
+
     std::vector< SvtHistoryOptions::HistoryItem > aHistoryList = SvtHistoryOptions::GetList( EHistoryType::PickList );
     for ( size_t i = 0; i < aHistoryList.size(); i++ )
     {
@@ -180,6 +233,36 @@ void RecentDocsView::Reload()
 
         insertItem(aURL, aTitle, rRecentEntry.sThumbnail, rRecentEntry.isReadOnly,
                    rRecentEntry.isPinned, i + 1);
+        aSeen.insert(aURL);
+    }
+
+    // EUnifyer: also surface the most recently touched files from the synced
+    // ~/EUnifyer Drive folder (managed by EUnifyer Desktop), so the Start
+    // Center reflects the user's Drive, not only files opened in this app.
+    const OUString aSyncUrl = getEunifyerSyncFolderUrl();
+    if (!aSyncUrl.isEmpty())
+    {
+        std::vector<EunifyerSyncFile> aSyncFiles;
+        collectSyncFiles(aSyncUrl, aSyncFiles, 0);
+        std::sort(aSyncFiles.begin(), aSyncFiles.end(),
+                  [](const EunifyerSyncFile& a, const EunifyerSyncFile& b)
+                  { return a.nMtime > b.nMtime; });
+
+        sal_uInt16 nId = static_cast<sal_uInt16>(aHistoryList.size());
+        int nAdded = 0;
+        for (const auto& rFile : aSyncFiles)
+        {
+            if (nAdded >= 16)
+                break;
+            if (aSeen.count(rFile.aURL))
+                continue;
+            const INetURLObject aURLObj(rFile.aURL);
+            if ((mnFileTypes != ApplicationType::TYPE_NONE) && !isAcceptedFile(aURLObj))
+                continue;
+            aSeen.insert(rFile.aURL);
+            insertItem(rFile.aURL, aURLObj.GetBase(), OUString(), false, false, ++nId);
+            ++nAdded;
+        }
     }
 
     CalculateItemPositions();
